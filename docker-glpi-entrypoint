@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+
+if [ -e /var/www/html/config/config_db.php ]; then
+  if [ -e /var/www/html/install/install.php ]; then
+    rm /var/www/html/install/install.php
+    php bin/console db:update --no-interaction
+    chown 33:33 -R /var/www/html/config /var/www/html/files/_log /var/www/html/files/_cache /var/www/html/files/_sessions
+  fi
+else
+  if [ "$DB_HOST" ] && [ "$DB_NAME" ] && [ "$DB_USER" ] && [ "$DB_PASSWORD" ]
+  then
+    php bin/console db:install --no-interaction \
+     --default-language="$DEFAULT_LANGUAGE" \
+     --db-host="$DB_HOST" \
+     --db-port="$DB_PORT" \
+     --db-name="$DB_NAME" \
+     --db-user="$DB_USER" \
+     --db-password="$DB_PASSWORD"
+    chown 33:33 -R /var/www/html/config /var/www/html/files/_log /var/www/html/files/_cache /var/www/html/files/_sessions
+    rm /var/www/html/install/install.php
+  fi
+fi
+
+#/usr/local/bin/docker-php-entrypoint:
+# first arg is `-f` or `--some-option`
+if [ "${1#-}" != "$1" ]; then
+    set -- apache2-foreground "$@"
+fi
+
+exec "$@"

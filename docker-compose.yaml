@@ -1,0 +1,70 @@
+version: '2'
+
+volumes:
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PATH_DB-./db}
+      o: bind
+  files:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PATH_FILES-./files}
+      o: bind
+  config:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PATH_CONFIG-./config}
+      o: bind
+  marketplace:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PATH_MARKETPLACE-./marketplace}
+      o: bind
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE-glpi}
+      - MYSQL_USER=${MYSQL_USER-glpi}
+    healthcheck:
+      test: /usr/bin/mysql --host=127.0.0.1 --user=$${MYSQL_USER} --password=$${MYSQL_PASSWORD} $${MYSQL_DATABASE} --silent --execute "SELECT 1;" && exit 0 || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+  glpi:
+    image: glpi
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - files:/var/www/html/files
+      - config:/var/www/html/config
+      - marketplace:/var/www/html/marketplace
+    environment:
+      - DEFAULT_LANGUAGE=${DEFAULT_LANGUAGE-en_GB}
+      - DB_HOST=${MYSQL_HOST-db}
+      - DB_NAME=${MYSQL_DATABASE-glpi}
+      - DB_USER=${MYSQL_USER-glpi}
+      - DB_PASSWORD=${MYSQL_PASSWORD}
+    depends_on:
+      db:
+        condition: service_started
+    healthcheck:
+      test: curl --silent --fail --show-error --output /dev/null -X GET http://127.0.0.1 || exit 1
+      interval: 60s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
