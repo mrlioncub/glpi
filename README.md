@@ -121,10 +121,10 @@ Updating the GLPI container is done by pulling the new image, throwing away the 
 Since all data is stored in volumes, nothing gets lost. The startup script will check for the version in your volume and the installed docker version. If it finds a mismatch, it automatically starts the upgrade process. Don't forget to add all the volumes to your new container, so it works as expected.
 
 ```console
-docker pull nextcloud
-docker stop <your_nextcloud_container>
-docker rm <your_nextcloud_container>
-docker run <OPTIONS> -d nextcloud
+docker pull mrlioncub/glpi
+docker stop <your_glpi_container>
+docker rm <your_glpi_container>
+docker run <OPTIONS> -d mrlioncub/glpi
 ```
 
 Beware that you have to run the same command with the options that you used to initially start your Nextcloud. That includes volumes, port mapping.
