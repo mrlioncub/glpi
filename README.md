@@ -110,7 +110,7 @@ This version will use the GLPI image and add a mariaDB container. The volumes ar
 
 Make sure to pass in values for `MYSQL_ROOT_PASSWORD` and `MYSQL_PASSWORD` variables before you run this setup in the variables file .env. Make sure to pass in values for `MYSQL_ROOT_PASSWORD` and `MYSQL_PASSWORD` variables before you run this setup in the variables file .env. It's possible to pass in values for `PATH_DB`, `PATH_FILES`, `PATH_CONFIG`,  `PATH_MARKETPLACE` or run command: `mkdir {db,files,config,marketplace}` in the same directory.
 
-https://github.com/mrlioncub/glpi/blob/main/docker-compose.yaml
+https://github.com/mrlioncub/glpi/blob/master/docker-compose.yaml
 
 Then run `docker-compose up -d`, now you can access GLPI at http://localhost:8080/ from your host system.
 
