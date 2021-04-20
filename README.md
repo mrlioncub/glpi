@@ -127,7 +127,7 @@ docker rm <your_glpi_container>
 docker run <OPTIONS> -d mrlioncub/glpi
 ```
 
-Beware that you have to run the same command with the options that you used to initially start your Nextcloud. That includes volumes, port mapping.
+Beware that you have to run the same command with the options that you used to initially start your GLPI. That includes volumes, port mapping.
 
 When using docker-compose your compose file takes care of your configuration, so you just have to run:
 
