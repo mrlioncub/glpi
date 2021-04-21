@@ -45,7 +45,7 @@ services:
       retries: 3
       start_period: 10s
   glpi:
-    image: glpi
+    image: mrlioncub/glpi
     restart: always
     ports:
       - 8080:80

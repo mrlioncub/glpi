@@ -13,7 +13,9 @@ RUN set -ex; \
     libsasl2-dev \
     libxml2-dev \
     libzip-dev \
-    libbz2-dev; \
+    libbz2-dev \
+    libgd3 \
+    libzip4; \
   docker-php-ext-configure gd; \
   docker-php-ext-configure intl; \
   docker-php-ext-configure ldap --with-ldap-sasl --with-libdir="lib/$(dpkg-architecture --query DEB_BUILD_MULTIARCH)"; \
@@ -36,7 +38,17 @@ RUN set -ex; \
   curl -fsSL -o /tmp/glpi.tgz https://github.com/glpi-project/glpi/releases/download/${GLPI_VERSION}/glpi-${GLPI_VERSION}.tgz; \
   tar --transform='flags=r;s/^glpi//' -xzf /tmp/glpi.tgz -C /var/www/html; \
   rm /tmp/glpi.tgz; \
-  chown 33:33 -R /var/www/html
+  chown 33:33 -R /var/www/html; \
+  apt-get autoremove --purge -y \
+    zlib1g-dev \
+    libpng-dev \
+    libicu-dev \
+    libldap2-dev \
+    libsasl2-dev \
+    libxml2-dev \
+    libzip-dev \
+    libbz2-dev; \
+  rm -rf /var/lib/apt/lists/*
 
 COPY docker-glpi-entrypoint /usr/local/bin/
 
