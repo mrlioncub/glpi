@@ -1,7 +1,7 @@
 FROM php:7.4-apache-buster
 
-ARG GLPI_VERSION=9.5.5
-ARG CAS_VERSION=1.3.8
+ARG GLPI_VERSION=9.5.6
+ARG CAS_VERSION=1.4.0
 
 RUN set -ex; \
   apt-get update; \
@@ -48,7 +48,8 @@ RUN set -ex; \
     libxml2-dev \
     libzip-dev \
     libbz2-dev; \
-  rm -rf /var/lib/apt/lists/*
+  rm -rf /var/lib/apt/lists/*; \
+  a2enmod rewrite;
 
 COPY docker-glpi-entrypoint /usr/local/bin/
 

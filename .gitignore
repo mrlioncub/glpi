@@ -1,0 +1,6 @@
+config
+db
+files
+marketplace
+read.txt
+docker-compose.test.yaml
