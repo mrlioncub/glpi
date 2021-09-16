@@ -36,7 +36,7 @@ It is distributed under the GNU GENERAL PUBLIC LICENSE Version 2 - please consul
 The image contains a webserver and exposes port 80. To start the container type:
 
 ```console
-$ docker run -d -p 8080:80 mrlioncub/glpi
+$ docker run -d -p 8080:80 ghcr.io/mrlioncub/glpi:latest
 ```
 
 Now you can access GLPI at http://localhost:8080/ from your host system.
@@ -60,7 +60,7 @@ GLPI:
     -v glpi_files:/var/www/html/files \
     -v glpi_config:/var/www/html/config \
     -v glpi_marketplace:/var/www/html/marketplace \
-    mrlioncub/glpi
+    ghcr.io/mrlioncub/glpi:latest
     ```
 
 Database:
@@ -124,7 +124,7 @@ Since all data is stored in volumes, nothing gets lost. The startup script will 
 docker pull mrlioncub/glpi
 docker stop <your_glpi_container>
 docker rm <your_glpi_container>
-docker run <OPTIONS> -d mrlioncub/glpi
+docker run <OPTIONS> -d ghcr.io/mrlioncub/glpi:latest
 ```
 
 Beware that you have to run the same command with the options that you used to initially start your GLPI. That includes volumes, port mapping.
