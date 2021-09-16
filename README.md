@@ -121,7 +121,7 @@ Updating the GLPI container is done by pulling the new image, throwing away the 
 Since all data is stored in volumes, nothing gets lost. The startup script will check for the version in your volume and the installed docker version. If it finds a mismatch, it automatically starts the upgrade process. Don't forget to add all the volumes to your new container, so it works as expected.
 
 ```console
-docker pull mrlioncub/glpi
+docker pull ghcr.io/mrlioncub/glpi:latest
 docker stop <your_glpi_container>
 docker rm <your_glpi_container>
 docker run <OPTIONS> -d ghcr.io/mrlioncub/glpi:latest
