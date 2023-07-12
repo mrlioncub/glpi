@@ -2,7 +2,7 @@ FROM php:7.4-apache-buster
 
 LABEL org.opencontainers.image.source https://github.com/mrlioncub/glpi
 
-ARG GLPI_VERSION=9.5.12
+ARG GLPI_VERSION=9.5.13
 ARG CAS_VERSION=1.4.0
 
 RUN set -ex; \
