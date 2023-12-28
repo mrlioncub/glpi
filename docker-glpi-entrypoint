@@ -3,14 +3,19 @@ set -e
 
 if [ -e /var/www/html/config/config_db.php ]; then
   if [ -e /var/www/html/install/install.php ]; then
+    DBSTATUS=$(php bin/console system:status -s db --format json)
+    if [ "$(echo $DBSTATUS | grep -i problem)" ]; then
+      echo "$DBSTATUS"
+      sleep 5
+      exit 1
+    fi
+    php bin/console db:update -n -s
+    php bin/console migration:migrate_all -n
     rm /var/www/html/install/install.php
-    php bin/console db:update --no-interaction
-    php bin/console migration:migrate_all --no-interaction
     chown 33:33 -R /var/www/html/config /var/www/html/files/_log /var/www/html/files/_cache /var/www/html/files/_sessions
   fi
 else
-  if [ "$DB_HOST" ] && [ "$DB_NAME" ] && [ "$DB_USER" ] && [ "$DB_PASSWORD" ]
-  then
+  if [ "$DB_HOST" ] && [ "$DB_NAME" ] && [ "$DB_USER" ] && [ "$DB_PASSWORD" ]; then
     php bin/console db:install --no-interaction \
      --default-language="$DEFAULT_LANGUAGE" \
      --db-host="$DB_HOST" \
