@@ -39,7 +39,7 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE-glpi}
       - MYSQL_USER=${MYSQL_USER-glpi}
     healthcheck:
-      test: /usr/bin/mysql --host=127.0.0.1 --user=$${MYSQL_USER} --password=$${MYSQL_PASSWORD} $${MYSQL_DATABASE} --silent --execute "SELECT 1;" && exit 0 || exit 1
+      test: /usr/bin/mariadb --host=127.0.0.1 --user=$${MYSQL_USER} --password=$${MYSQL_PASSWORD} $${MYSQL_DATABASE} --silent --execute "SELECT 1;" && exit 0 || exit 1
       interval: 30s
       timeout: 10s
       retries: 3

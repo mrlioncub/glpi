@@ -5,6 +5,7 @@ if [ -e /var/www/html/config/config_db.php ]; then
   if [ -e /var/www/html/install/install.php ]; then
     rm /var/www/html/install/install.php
     php bin/console db:update --no-interaction
+    php bin/console migration:migrate_all --no-interaction
     chown 33:33 -R /var/www/html/config /var/www/html/files/_log /var/www/html/files/_cache /var/www/html/files/_sessions
   fi
 else

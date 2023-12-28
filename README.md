@@ -1,8 +1,6 @@
 ![GLPI Logo](https://raw.githubusercontent.com/glpi-project/glpi/master/pics/logos/logo-GLPI-250-black.png)
 
-[![Build Status](https://img.shields.io/docker/cloud/build/mrlioncub/glpi)](https://hub.docker.com/r/mrlioncub/glpi)
-[![Docker Automated build](https://img.shields.io/docker/cloud/automated/mrlioncub/glpi)](https://hub.docker.com/r/mrlioncub/glpi)
-[![Docker Image Size](https://img.shields.io/docker/image-size/mrlioncub/glpi/latest)](https://hub.docker.com/r/mrlioncub/glpi)
+[![Latest Tag](https://img.shields.io/github/v/tag/mrlioncub/glpi)](https://github.com/mrlioncub/glpi/pkgs/container/glpi)
 
 ## About GLPI
 
@@ -133,5 +131,5 @@ When using docker-compose your compose file takes care of your configuration, so
 
 ```console
 docker-compose pull
-docker-compose up -d
+docker-compose -p glpi up -d
 ```
