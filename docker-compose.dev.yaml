@@ -43,7 +43,7 @@ services:
       retries: 3
       start_period: 10s
   glpi:
-    image: ghcr.io/mrlioncub/glpi
+    image: glpi
     restart: always
     ports:
       - 8080:80
