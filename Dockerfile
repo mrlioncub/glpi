@@ -2,7 +2,7 @@ FROM php:8.2-apache-bookworm
 
 LABEL org.opencontainers.image.source=https://github.com/mrlioncub/glpi
 
-ARG GLPI_VERSION=10.0.16
+ARG GLPI_VERSION=10.0.17
 ARG CAS_VERSION=1.6.1
 
 RUN set -ex; \
