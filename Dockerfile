@@ -1,6 +1,7 @@
 FROM php:8.2-apache-bookworm
 
-LABEL org.opencontainers.image.source=https://github.com/mrlioncub/glpi
+LABEL org.opencontainers.image.source="https://github.com/mrlioncub/glpi"
+LABEL org.opencontainers.image.description="GLPI is a Free Asset and IT Management Software"
 
 ARG GLPI_VERSION=10.0.25
 ARG CAS_VERSION=1.6.1
